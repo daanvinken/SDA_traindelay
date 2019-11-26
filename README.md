@@ -17,7 +17,7 @@ The daterange of this data is that of the entire past year.
 
 ## Time planning
 Week 1:
-Gather data. Current source is treinposities.nl, and possibly from NS.
+Gather data. Current source is treinposities.nl (https://treinposities.nl/vertrekstaat), and possibly from NS (https://apiportal.ns.nl/).
 Familiarize and vizualise the data, to see if we can find possible probable hypotheses.
 
 Week 2:
