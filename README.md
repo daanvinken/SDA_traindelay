@@ -7,7 +7,7 @@ Ricardo van Aken
 Jesse Postema
 
 ## Research questions
-Can we predict train delays? (????)
+Can we correctly predict train delays using historical data?
 
 ## Dataset
 Our dataset consists of departure times of trains, containing info like:
@@ -28,6 +28,7 @@ Further testing of hypotheses, if possible implement nice-to-have's, such as usi
 
 Week 4:
 Finish implementing tests and nice-to-haves, make presentation.
-## Sources
 
+## Sources
+van der Breggen, L. P. A., et al. "Voorspellingsmodel voor treinvertragingen." (2015).
 
