@@ -1,17 +1,14 @@
-# plot showing a scatterplot between amount of stops made per day, and amount of delayed stops made per day
+#plot showing amount of stops and delays per weekday (total)
 import matplotlib.pyplot as plt
 import csv
 import datetime
-
-# year, month, day = '2019-12-02'.split("-")
-# print(datetime.date(int(year), int(month), int(day)).weekday())
 
 columns = [
     "date", "station", "trainnumber", "company",
     "traintype", "destination", "time", "delay", "canceled"
 ]
 
-# Dictionary contains dates as keys and sets of trainnumbers as values
+# Dictionary contains weekdays as keys and occurences as values
 total_trains = {}
 delayed_trains = {}
 
