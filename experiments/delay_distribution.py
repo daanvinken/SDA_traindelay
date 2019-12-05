@@ -42,7 +42,7 @@ for day in week_days:
         current_date = reader.__next__()[0]
         delay_counter=0
         for row in reader:
-            #Check for matching weekday
+            print(row)            #Check for matching weekday
             if str(row[9]) == str(day):
                 #check for current date (same day)``
                 if str(current_date) == str(row[0]):
