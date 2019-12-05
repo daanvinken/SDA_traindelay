@@ -36,12 +36,12 @@ class Dutch_trains:
 class Train_ride:
     def __init__(self, row):
         self.date = row[0]
-        self.stations = list(row[1])
+        self.stations = [row[1]]
         self.train_number = row[2]
         self.transporter = row[3]
         self.train_type = row[4]
-        self.destination_s = list(row[5])
-        self.departure_times = list(row[6])
+        self.destination_s = [row[5]]
+        self.departure_times = [row[6]]
         #self.delay_at_station = None
         #self.cancelled = None
 
@@ -60,5 +60,5 @@ if __name__ == "__main__":
 
 
 class Network:
-    def nothing():
+    def nothing(self):
         pass
