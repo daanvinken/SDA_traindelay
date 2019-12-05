@@ -11,7 +11,7 @@ argumentList = sys.argv[1:]
 
 # define allowed arguments
 unixOptions = ""
-gnuOptions = ["max_delay=", "bins=", "file=","log="]
+gnuOptions = ["max_delay=", "bins="]
 
 # check that we get commands in the right format
 try:
@@ -29,7 +29,7 @@ for arg, value in arguments:
         print("setting max delay time to %s" % (value))
         max_delay = value
     if arg == '--bins':
-        print("setting max delay time to %s" % (value))
+        print("setting bins to %s" % (value))
         bins = value
 
 delayList = []
@@ -43,13 +43,12 @@ with open('../data/delay.csv') as source_file:
         cancelled = int(row[8])
         if (vertraging <= max_delay):
             delayList.append(vertraging)
-            if (vertraging > 30):
+            if (vertraging > 120):
                 print(row)
 
 
 plt.hist(delayList, bins=bins)
 plt.yscale("log")
-plt.xscale("log")
 plt.xlabel("Delay in minutes (excluding cancelled trains)")
 plt.ylabel("Occurences (log)")
 plt.show()
