@@ -1,6 +1,7 @@
-#plot showing amount of stops and delays per date (total)
+#plot showing amount of stops and delays per date (total), filtering out weekends for smoother lines
 import matplotlib.pyplot as plt
 import csv
+import datetime
 
 columns = [
     "date", "station", "trainnumber", "company",
@@ -20,7 +21,12 @@ with open("../data/vertrektijden.csv") as vertrektijden:
 
         date = line[columns.index("date")]
         delay = line[columns.index("delay")]
+        year, month, day = date.split("-")
+        weekday = datetime.date(int(year), int(month), int(day)).weekday()
         cancelled = line[columns.index("cancelled")]
+
+        # filtering out weekends
+        if (weekday >= 5): continue
 
         if date not in total_trains:
             total_trains[date] = 1
