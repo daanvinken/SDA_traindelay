@@ -5,6 +5,13 @@ import sys
 import getopt
 import csv
 import matplotlib.pyplot as plt
+import numpy as np
+import scipy
+import plfit
+from plfit import cplfit
+from plfit import fplfit
+import time
+import pylab as plt
 
 # get arguments
 argumentList = sys.argv[1:]
@@ -22,15 +29,15 @@ except getopt.error as err:
 
 #default values
 max_delay = 800
-bins = 100
+bins = 30
 
 for arg, value in arguments:
     if arg == '--max_delay':
         print("setting max delay time to %s" % (value))
-        max_delay = value
+        max_delay = int(value)
     if arg == '--bins':
         print("setting bins to %s" % (value))
-        bins = value
+        bins = int(value)
 
 delayList = []
 
@@ -51,5 +58,6 @@ plt.hist(delayList, bins=bins)
 plt.yscale("log")
 plt.xlabel("Delay in minutes (excluding cancelled trains)")
 plt.ylabel("Occurences (log)")
+plt.title("Delay in minutes compared to their occurences for all train rides of the NS.\nCancelled trains not included.")
 plt.show()
 
