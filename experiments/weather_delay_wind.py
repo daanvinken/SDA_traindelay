@@ -8,7 +8,6 @@ columns = [
     "traintype", "destination", "time", "delay", "cancelled"
 ]
 
-
 #ive added some extra outliers, but i don't know why they exist yet.
 # So maybe they should be included.
 obsolete_dates = ['2018-09-03', '2018-12-25', '2018-12-26','2018-12-31', '2019-01-01',
@@ -49,7 +48,7 @@ with open("../data/vertrektijden.csv") as vertrektijden:
             print(str(delay) + " --> " + str(total_trains[str(delay)]))
 
 rainlist = []
-with open("../data/neerslag.txt") as neerslag:
+with open("../data/wind.txt") as neerslag:
     reader = csv.reader(neerslag, delimiter=",")
     for line in reader:
         date = str(line[1])
@@ -72,5 +71,5 @@ ax2.plot(*zip(*sorted(total_trains.items())), label="total trains", color='r')
 ax2.tick_params('y', colors='r')
 
 fig.tight_layout()
-plt.title("Blue line, rain in mm on a day. Red line minutes of delay on one day.")
+plt.title("Blue line, Highest average (per hour) wind speed. Red line minutes of delay on one day.")
 plt.show()
