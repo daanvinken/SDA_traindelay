@@ -2,6 +2,7 @@
 import sys
 import getopt
 import csv
+import datetime
 
 # get arguments
 argumentList = sys.argv[1:]
@@ -10,7 +11,9 @@ argumentList = sys.argv[1:]
 unixOptions = ""
 gnuOptions = ["help", "file=", "date=", "hour=", "daterange=", "station=",
             "number=", "transporter=", "vehicle=", "destination=", "delay=",
-            "cancelled=", "limit="]
+            "cancelled=", "limit=", "weekday="]
+#List with week days
+week_days= ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday']
 
 # usage guide
 def usageGuide():
@@ -28,6 +31,7 @@ def usageGuide():
     print("--delay:\tfilter on having >= delay (integer)\t\t\t(default: none)\t(optional)")
     print("--cancelled:\tfilter on cancelled or not (yes/no/both)\t\t(default: both)\t(optional)")
     print("--limit:\tlimit amount of results (integer)\t\t\t(default: none)\t(optional)")
+    print("--weekday:\tadd a column with the day of the week (true/false}\t\t\t(default: no)\t(optional)")
 
 # check that we get commands in the right format
 try:
@@ -50,6 +54,7 @@ destination = False
 delay = False
 cancelled = False
 limit = False
+weekday = False
 
 for arg, value in arguments:
     if arg == '--help':
@@ -98,6 +103,14 @@ for arg, value in arguments:
     elif arg == '--limit':
         print("limiting output to %s entries" % (value))
         limit = int(value)
+    elif arg == '--weekday':
+        print("Adding day of week to each row.")
+        if value=='true':
+            weekday = True
+            print("Weekdays will be included.")
+        elif value=='false':
+            weekday = False
+            print("Weekdays will not be included (default option).")
 
 # having a destinationfile is mandatory
 if (not destinationFile):
@@ -108,19 +121,18 @@ if (not destinationFile):
 # we always use the same source file
 with open('../data/vertrektijden.csv') as source_file:
     with open('../data/' + destinationFile, 'w') as dest_file:
-        reader = csv.reader(source_file, delimiter=",")
+        reader = csv.reader(source_file, delimiter=";")
         writer = csv.writer(dest_file)
 
         # index we need for keeping track of the limit
         index = 0
-
         for row in reader:
             # if we reach our limit, we kill the process
             if (limit and index >= limit):
                 exit()
-            
+
             # check if all parameters match
-            if((not date or row[0] == date) and 
+            if((not date or row[0] == date) and
                 (not station or row[1] == station) and
                 (not number or row[2] == number) and
                 (not transporter or row[3] == transporter) and
@@ -131,6 +143,14 @@ with open('../data/vertrektijden.csv') as source_file:
                 (not delay or int(row[7]) >= delay) and
                 (not cancelled or row[8] == cancelled)):
 
+                #Add day of the week if necessary
+                if weekday:
+                    # print(row[0].split("-"))
+                    #defines Splitted Date
+                    sd_str = row[0].split("-") #yy/mm/dd
+                    sd = [int(item) for item in sd_str]
+                    weekday_no = datetime.date(sd[0],sd[1],sd[2]).weekday()
+                    row.append(week_days[weekday_no])
                 # write to file and increment index
                 writer.writerow(list(row))
                 index = index + 1
