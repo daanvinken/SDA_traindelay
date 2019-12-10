@@ -61,7 +61,7 @@ for i in range(len(something[1])):
 
 # plt.show()
 
-yerr = 200
+yerr = 2
 xdata = something[1][:-1]
 ydata = something[0]
 
