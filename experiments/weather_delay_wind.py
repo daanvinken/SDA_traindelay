@@ -43,12 +43,9 @@ with open("../data/vertrektijden.csv") as vertrektijden:
         # filtering out weekends
         if (weekday >= 5): continue
         if date not in total_trains:
-            total_trains[date] = 1
+            total_trains[date] = int(delay)
         else:
-            total_trains[date] = total_trains[date] + 1
-    for delay in total_trains.keys():
-        if total_trains[str(delay)] < 52000:
-            print(str(delay) + " --> " + str(total_trains[str(delay)]))
+            total_trains[date] = total_trains[date] + int(delay)
 
 rainlist = []
 with open("../data/wind_per_uur.txt") as neerslag:
