@@ -77,7 +77,7 @@ pinit = [1.0, -1.0]
 out = optimize.leastsq(errfunc, pinit,
                        args=(logx, logy, logyerr), full_output=1)
 
-pfinal = out[0]
+pfinal = out[0] 
 covar = out[1]
 print(pfinal)
 print(covar)
