@@ -1,4 +1,5 @@
 #histogram showing difference of stops and delays per date (total), filtering out weekdays for smoother lines
+import scipy.stats as st
 import matplotlib.pyplot as plt
 import csv
 import datetime
@@ -65,7 +66,39 @@ for key in delayed_trains.keys():
 for i in range(len(delayed_sat)):
     delayed_diffs.append(delayed_sat[i] - delayed_sun[i])
 
-plt.hist(total_diffs, alpha=0.5, label="difference in total trains on saturday and the following sunday")
-plt.hist(delayed_diffs, alpha=0.5, label="difference in delayed trains on saturday and the following sunday")
+total_mean_diffs = sum(total_diffs)/len(total_diffs)
+delayed_mean_diffs = sum(delayed_diffs)/len(delayed_diffs)
+
+def stddev(sample, mean):
+    diffs = []
+    for num in sample:
+        diffs.append((num - mean)**2)
+
+    variance = sum(diffs)/len(diffs)
+    return variance**0.5
+
+total_std_diffs = stddev(total_diffs, total_mean_diffs)
+print("calculated total mean is %s" % (total_mean_diffs))
+print("calculated total standard deviation is %s" % (total_std_diffs))
+delayed_std_diffs = stddev(delayed_diffs, delayed_mean_diffs)
+print("calculated delayed mean is %s" % (delayed_mean_diffs))
+print("calculated delayed standard deviation is %s" % (delayed_std_diffs))
+
+_, total_p = st.kstest(total_diffs, 'norm', (total_mean_diffs, total_std_diffs))
+_, delayed_p = st.kstest(delayed_diffs, 'norm', (delayed_mean_diffs, delayed_std_diffs))
+print("calculated p-value from normal distribution with calculated total mean and standard deviation is %s (no rejection)" % (total_p))
+print("calculated p-value from normal distribution with calculated delayed mean and standard deviation is %s (no rejection)" % (delayed_p))
+
+total_xs = range(3500,6500)
+delayed_xs = range(-1500, 6500)
+
+total_ys = st.norm.pdf(total_xs, loc=total_mean_diffs, scale=total_std_diffs)
+delayed_ys = st.norm.pdf(delayed_xs, loc=delayed_mean_diffs, scale=delayed_std_diffs)
+
+plt.hist(total_diffs, alpha=0.5, density=True, label="difference in total trains on saturday and the following sunday")
+plt.hist(delayed_diffs, alpha=0.5, density=True, label="difference in delayed trains on saturday and the following sunday")
+plt.plot(total_xs, total_ys, alpha=0.5, label="normal distribution with calculated total mean and stddev from sample")
+plt.plot(delayed_xs, delayed_ys, alpha=0.5, label="normal distribution with calculated delayed mean and stddev from sample")
+
 plt.legend()
 plt.show()

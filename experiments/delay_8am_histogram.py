@@ -1,4 +1,5 @@
 # histogram showing amount of delayed stops per weekday at 8am
+import scipy.stats as st
 import matplotlib.pyplot as plt
 import csv
 import datetime
@@ -36,7 +37,30 @@ with open("../data/vertrektijden.csv") as vertrektijden:
             else:
                 delayed_trains[date] = delayed_trains[date] + 1
 
-plt.hist(delayed_trains.values(), 20)
-plt.ylabel("Occurences")
-plt.xlabel("Amount of delayed stops at 8am per weekday")
+delayed = list(delayed_trains.values())
+
+delayed_mean = sum(delayed)/len(delayed)
+
+def stddev(sample, mean):
+    diffs = []
+    for num in sample:
+        diffs.append((num - mean)**2)
+
+    variance = sum(diffs)/len(diffs)
+    return variance**0.5
+
+delayed_std = stddev(delayed, delayed_mean)
+print("calculated delayed mean is %s" % (delayed_mean))
+print("calculated delayed standard deviation is %s" % (delayed_std))
+
+_, p = st.kstest(delayed, 'norm', (delayed_mean, delayed_std))
+print("calculated p-value from normal distribution with calculated delayed mean and standard deviation is %s (no rejection)" % (p))
+
+xs = range(0, 2500)
+ys = st.norm.pdf(xs, loc=delayed_mean, scale=delayed_std)
+
+plt.hist(delayed, 20, density=True, label="Amount of delayed stops at 8am per weekday")
+plt.plot(xs, ys, alpha=0.5, label="normal distribution with calculated delayed mean and stddev from sample")
+
+plt.legend()
 plt.show()
