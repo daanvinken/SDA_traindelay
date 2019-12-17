@@ -26,12 +26,13 @@ with open("../data/NS_delayed_trains_2019_08_01_to_2019_11_01.csv") as vertrekti
 
 scipy_params = st.expon.fit(delays, floc=0)
 
-print(st.kstest(delays, 'expon', scipy_params)[1])
+p = st.kstest(delays, 'expon', scipy_params)[1]
 x = np.linspace(1, 30, 100)
 plt.hist(delays, bins=15, label="Observations", density=True)
 plt.plot(x, st.expon(*scipy_params).pdf(x), label="scipy expon fit")
 plt.ylabel("Frequencies (normalized)")
 plt.xlabel("Minutes delay")
+plt.title("time delay follows exponential distribution with p-value {} (rejection)".format(p))
 plt.legend()
 plt.show()
 

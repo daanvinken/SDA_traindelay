@@ -55,6 +55,8 @@ y_pos = np.arange(len(companies))
 
 plt.bar(y_pos, performance, align='center')
 plt.xticks(y_pos, companies, rotation='vertical')
+plt.xlabel("Companies")
+plt.ylabel("$\\dfrac{\\mathrm{delayed}}{\\mathrm{total}} \%$")
 plt.tight_layout()
 
 plt.show()
