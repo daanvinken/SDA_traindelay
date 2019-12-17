@@ -8,10 +8,6 @@ columns = [
     "traintype", "destination", "time", "delay", "cancelled"
 ]
 
-obsolete_dates = ['2018-09-03', '2018-12-25', '2018-12-26','2018-12-31', '2019-01-01',
-'2019-04-19', '2019-04-21', '2019-04-22','2019-05-05','2019-05-28', '2019-05-30',
- '2019-06-09','2019-06-10', '2019-11-26']
-
 # Dictionary contains dates as keys and occurences as values
 total_trains = {}
 delayed_trains_1 = {}
@@ -24,9 +20,6 @@ with open("../data/vertrektijden.csv") as vertrektijden:
     for line in reader:
 
         date = line[columns.index("date")]
-
-        if (date in obsolete_dates) : continue
-
         delay = line[columns.index("delay")]
         year, month, day = date.split("-")
         weekday = datetime.date(int(year), int(month), int(day)).weekday()

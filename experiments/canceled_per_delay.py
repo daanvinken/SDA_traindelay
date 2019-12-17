@@ -25,7 +25,8 @@ with open("../data/vertrektijden.csv") as vertrektijden:
     for line in reader:
         date = line[columns.index("date")]
 
-        if date in obsolete_dates: continue
+        if date in obsolete_dates:
+            continue
 
         year, month, day = date.split("-")
         weekday = datetime.date(int(year), int(month), int(day)).weekday()
@@ -46,7 +47,7 @@ with open("../data/vertrektijden.csv") as vertrektijden:
         if int(delay) >= 1:
             delayed_trains[date] += 1
 
-        # Train was canceled
+        # Number of canceled trains
         if int(canceled) == 1:
             canceled_trains[date] += 1
 
@@ -57,24 +58,26 @@ for date in delayed_trains:
     delay_frequency = delayed_trains[date]
     canceled_frequency = canceled_trains[date]
 
+    # Found first occurence of specific delay frequency
     if delay_frequency not in delays:
         delays[delay_frequency] = (1, canceled_frequency)
 
-    # Take average of previously found canceled trains
+    # Take average of current and previously found canceled trains
     else:
         count = delays[delay_frequency][0] + 1
         freqs = delays[delay_frequency][1]
         avg = (freqs + canceled_frequency) / count
         delays[delay_frequency] = (count, avg)
 
-sort = {}
+# sort = {}
 
-for i in sorted(list(delays.keys())):
-    sort[i] = delays[i]
+# Sort delay frequencies for better plotting
+# for i in sorted(list(delays.keys())):
+#     sort[i] = delays[i]
 
-vals = [x[1] for x in sort.values()]
+vals = [x[1] for x in delays.values()]
 
-plt.scatter(list(sort.keys()), vals, marker='.')
+plt.scatter(list(delays.keys()), vals, marker='.')
 # plt.hist(vals)
 plt.xlabel("Number of delays")
 plt.ylabel("Number of canceled trains")
