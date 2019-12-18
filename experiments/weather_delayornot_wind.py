@@ -25,10 +25,8 @@ obsolete_dates_w = ['20180903', '20181225', '20181226','20181231', '20190101',
 
 # Dictionary contains dates as keys and occurences as values
 total_trains = {}
+total_delayed_trains = {}
 
-print(len(obsolete_dates))
-print(len(other_outliers))
-print(len(obsolete_dates_w))
 with open("../data/vertrektijden.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=";")
 
@@ -42,10 +40,18 @@ with open("../data/vertrektijden.csv") as vertrektijden:
 
         # filtering out weekends
         if (weekday >= 5): continue
-        if date not in total_trains:
-            total_trains[date] = int(delay)
+        if int(delay) == 0:
+            if date in total_trains:
+                total_trains[date] = total_trains[date] + 1
+            else:
+                total_trains[date] = 1
         else:
-            total_trains[date] = total_trains[date] + int(delay)
+            if date in total_delayed_trains:
+                total_delayed_trains[date] = total_delayed_trains[date] + 1
+            else:
+                total_delayed_trains[date] = 1
+
+
 
 rainlist = []
 with open("../data/wind_per_uur.txt") as neerslag:
@@ -57,19 +63,24 @@ with open("../data/wind_per_uur.txt") as neerslag:
         rain = int(line[2])
         if (weekday >=5): continue
         rainlist.append(int(rain))
-print("lengths " + str(len(total_trains)))
-print("lengthss " + str(len(rainlist)))
 
 
+percentage_delayed_per_day = []
+for date in total_trains.keys():
+    factor = (total_delayed_trains[str(date)] / (total_delayed_trains[str(date)] + total_trains[str(date)]))*100
+    percentage_delayed_per_day.append(factor)
 
+print(len(percentage_delayed_per_day))
+print(len(rainlist))
 
 fig, ax1 = plt.subplots()
 ax1.plot(rainlist, 'b-')
 ax1.tick_params('y', colors='b')
 ax2 = ax1.twinx()
-ax2.plot(*zip(*sorted(total_trains.items())), label="total trains", color='r')
+# ax2.plot(*zip(*sorted(total_trains.items())), label="total trains", color='r')
+ax2.plot(percentage_delayed_per_day, label="percentage delayed trains per day", color='r')
 ax2.tick_params('y', colors='r')
 
 fig.tight_layout()
-plt.title("Blue line, Highest average (per hour) wind speed. Red line minutes of delay on one day.")
+plt.title("Blue line, Highest average (per hour) wind speed. Red line percentage of delayed trains on a day")
 plt.show()
