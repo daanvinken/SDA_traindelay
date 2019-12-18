@@ -1,4 +1,4 @@
-# histogram showing amount of delayed stops per weekday at 8am
+# histogram showing amount of delayed stops per weekday at 11pm
 import scipy.stats as st
 import matplotlib.pyplot as plt
 import csv
@@ -34,7 +34,7 @@ with open("../data/vertrektijden.csv") as vertrektijden:
         time = line[columns.index("time")]
         hour, _, _ = time.split(":")
 
-        if (hour != "08"): continue
+        if (hour != "23"): continue
 
         delay = line[columns.index("delay")]
 
@@ -66,7 +66,7 @@ print("calculated p-value from normal distribution with calculated delayed mean 
 xs = range(0, 2500)
 ys = st.norm.pdf(xs, loc=delayed_mean, scale=delayed_std)
 
-plt.hist(delayed, 20, density=True, label="Amount of delayed stops at 8am per weekday")
+plt.hist(delayed, 20, density=True, label="Amount of delayed stops at 11pm per weekday")
 plt.plot(xs, ys, label="normal distribution with calculated delayed mean and stddev from sample")
 
 plt.legend()

@@ -8,6 +8,7 @@ columns = [
     "traintype", "destination", "time", "delay", "cancelled"
 ]
 
+
 #ive added some extra outliers, but i don't know why they exist yet.
 # So maybe they should be included.
 obsolete_dates = ['2018-09-03', '2018-12-25', '2018-12-26','2018-12-31', '2019-01-01',
@@ -51,10 +52,8 @@ with open("../data/vertrektijden.csv") as vertrektijden:
             else:
                 total_delayed_trains[date] = 1
 
-
-
 rainlist = []
-with open("../data/wind_per_uur.txt") as neerslag:
+with open("../data/neerslag.txt") as neerslag:
     reader = csv.reader(neerslag, delimiter=",")
     for line in reader:
         date = str(line[1])
@@ -64,17 +63,15 @@ with open("../data/wind_per_uur.txt") as neerslag:
         if (weekday >=5): continue
         rainlist.append(int(rain))
 
-
 percentage_delayed_per_day = []
 for date in total_trains.keys():
     factor = (total_delayed_trains[str(date)] / (total_delayed_trains[str(date)] + total_trains[str(date)]))*100
     percentage_delayed_per_day.append(factor)
 
-
-normalized_wind = []
-for wind in windlist:
-    x = wind/max(windlist) * 100
-    normalized_wind.append(x)
+normalized_rain = []
+for rain in rainlist:
+    x = rain/max(rainlist) * 100
+    normalized_rain.append(x)
 
 normalized_percentages = []
 for value in percentage_delayed_per_day:
@@ -82,8 +79,9 @@ for value in percentage_delayed_per_day:
     normalized_percentages.append(x)
 
 
-plt.plot(rainlist, label="Normalized highest windspeed (average of an hour)", color='b')
+plt.plot(normalized_rain, label="Normalized rain in mm on a day", color='b')
 plt.plot(normalized_percentages, label="Normalized percentage of delayed trains per day", color='r')
-plt.title("Blue line, Highest average (per hour) wind speed. Red line percentage of delayed trains on a day. \n Both normalized.")
 plt.legend()
 plt.show()
+
+
