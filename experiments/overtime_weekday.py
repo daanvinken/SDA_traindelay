@@ -15,7 +15,7 @@ delayed_trains_10 = {}
 cancelled_trains = {}
 
 with open("../data/vertrektijden.csv") as vertrektijden:
-    reader = csv.reader(vertrektijden, delimiter=",")
+    reader = csv.reader(vertrektijden, delimiter=";")
 
     for line in reader:
 
