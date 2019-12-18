@@ -2,6 +2,7 @@ import scipy.stats as st
 import matplotlib.pyplot as plt
 import csv
 import datetime
+import numpy as np
 
 columns = [
     "date", "station", "trainnumber", "company",
@@ -75,11 +76,37 @@ for date in delayed_trains:
 # for i in sorted(list(delays.keys())):
 #     sort[i] = delays[i]
 
-vals = [x[1] for x in delays.values()]
+xs = list(delays.keys())
+ys = [y[1] for y in delays.values()]
 
-plt.scatter(list(delays.keys()), vals, marker='.')
-# plt.hist(vals)
+plt.scatter(xs, ys, marker='.')
+
+# solve for a and b
+def best_fit(X, Y):
+
+    xbar = sum(X)/len(X)
+    ybar = sum(Y)/len(Y)
+    n = len(X) # or len(Y)
+
+    numer = sum([xi*yi for xi,yi in zip(X, Y)]) - n * xbar * ybar
+    denum = sum([xi**2 for xi in X]) - n * xbar**2
+
+    b = numer / denum
+    a = ybar - b * xbar
+
+    print('best fit line:\ny = {:.2f} + {:.2f}x'.format(a, b))
+
+    return a, b
+
+# plt.plot(np.unique(xs), np.poly1d(np.polyfit(xs, ys, 1))(np.unique(xs)), 'r')
+# plt.hist(xs)
 plt.xlabel("Number of delays")
 plt.ylabel("Number of canceled trains")
+
+a, b = best_fit(xs, ys)
+
+
+yfit = [a + b * xi for xi in xs]
+plt.plot(xs, yfit, 'r')
 # plt.show()
-plt.savefig('../results/canceled_per_delay.png', bbox_inches='tight')
+plt.savefig('../results/canceled_per_delay2.png', bbox_inches='tight')
