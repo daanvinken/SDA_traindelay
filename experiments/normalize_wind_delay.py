@@ -70,8 +70,6 @@ for date in total_trains.keys():
     factor = (total_delayed_trains[str(date)] / (total_delayed_trains[str(date)] + total_trains[str(date)]))*100
     percentage_delayed_per_day.append(factor)
 
-print(len(percentage_delayed_per_day))
-print(len(rainlist))
 
 normalized_rain = []
 for rain in rainlist:
@@ -84,8 +82,8 @@ for value in percentage_delayed_per_day:
     normalized_percentages.append(x)
 
 
-plt.plot(rainlist, 'b-')
-plt.plot(normalized_percentages, label="percentage delayed trains per day", color='r')
-plt.title("Blue line, Highest average (per hour) wind speed. Red line percentage of delayed trains on a day")
+plt.plot(rainlist, label="Normalized highest windspeed (average of an hour)", color='b')
+plt.plot(normalized_percentages, label="Normalized percentage of delayed trains per day", color='r')
+plt.title("Blue line, Highest average (per hour) wind speed. Red line percentage of delayed trains on a day. \n Both normalized.")
 plt.legend()
 plt.show()
