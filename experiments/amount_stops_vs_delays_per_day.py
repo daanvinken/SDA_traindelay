@@ -30,7 +30,12 @@ with open("../data/vertrektijden.csv") as vertrektijden:
             else:
                 delayed_trains[date] = delayed_trains[date] + 1
 
+f = plt.figure()
+
 plt.scatter(total_trains.values(), delayed_trains.values(), alpha=0.1)
 plt.ylabel("Amount of delayed stops per day")
 plt.xlabel("Amount of stops per day")
+
+f.savefig('../results/amount_stops_vs_delays_per_day.png', bbox_inches='tight')
+
 plt.show()

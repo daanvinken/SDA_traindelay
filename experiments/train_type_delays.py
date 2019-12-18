@@ -24,7 +24,7 @@ for i in types:
 for i in types:
     total_trains[i] = 0;
 
-with open("../data/trains_2019_08_01_to_2019_11_01.csv") as vertrektijden:
+with open("../data/NS_trains_2019_08_01_to_2019_11_01.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
@@ -47,7 +47,8 @@ for i in delayed_trains:
     performance.append(delayed_trains[i] / total_trains[i])
 
 y_pos = np.arange(len(types))
-# performance = delayed_trains.values()
+
+f = plt.figure()
 
 plt.bar(y_pos, performance, align='center')
 plt.xticks(y_pos, types, rotation='vertical')
@@ -55,4 +56,4 @@ plt.tight_layout()
 
 plt.show()
 
-# print(types)
+f.savefig('../results/train_type_delays.png', bbox_inches='tight')

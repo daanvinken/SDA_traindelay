@@ -15,7 +15,7 @@ columns = [
 delayed_trains = {}
 delays = []
 
-with open("../data/NS_delayed_trains_2019_08_01_to_2019_11_01.csv") as vertrektijden:
+with open("../data/vertragingen.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
@@ -24,17 +24,40 @@ with open("../data/NS_delayed_trains_2019_08_01_to_2019_11_01.csv") as vertrekti
         if delay <= 30:
             delays.append(delay)
 
-scipy_params = st.expon.fit(delays, floc=0)
+delays = np.array(delays)
 
-p = st.kstest(delays, 'expon', scipy_params)[1]
-x = np.linspace(1, 30, 100)
-plt.hist(delays, bins=15, label="Observations", density=True)
-plt.plot(x, st.expon(*scipy_params).pdf(x), label="scipy expon fit")
-plt.ylabel("Frequencies (normalized)")
+p = 1 / float(np.mean(delays))
+k = np.arange(1, delays.max() + 1)
+
+f = plt.figure()
+
+freqs, _, _ = plt.hist(delays, bins=30, label="Observations")
+plt.plot(k, st.geom.pmf(k, p) * len(delays), 'r', label="Geometric distribution")
+
+p_value = st.chisquare(freqs, st.geom.pmf(k, p) * len(delays))[1]
+
+plt.title("Fit geometric distribution on data, p-value {} (Rejection)".format(p_value))
+plt.ylabel("Frequencies")
 plt.xlabel("Minutes delay")
-plt.title("time delay follows exponential distribution with p-value {} (rejection)".format(p))
 plt.legend()
-plt.show()
 
-# plt.plot(list(data.keys()), list(data.values()))
+plt.show()
+f.savefig('../results/delay_time_distribution.png', bbox_inches='tight')
+
+
+# print(freqs)
+# print(st.geom.pmf(k, p) * len(delays))
+
+# print()
+
+# plt.hist(delays, bins=30, label="Observations", density=True)
+# plt.plot(k, st.geom.pmf(k, p), '.r')
 # plt.show()
+# plt.plot(x, st.expon(*scipy_params).pdf(x), label="scipy expon fit")
+# plt.title("p-value {} (rejection), location: {}, scale: {}".format(p, *scipy_params))
+# plt.legend()
+# # plt.show()
+# plt.savefig('../results/delay_time_distribution.png', bbox_inches='tight')
+#
+# # plt.plot(list(data.keys()), list(data.values()))
+# # plt.show()
