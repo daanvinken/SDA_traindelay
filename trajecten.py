@@ -60,10 +60,11 @@ def get_paths(filepath):
 
     with open(filepath) as FileObj:
         for line in FileObj:
-            if (i > 1000000):
-                break
-            else:
-                i += 1
+            # if (i > 100000):
+            #     break
+            # else:
+            #     i += 1
+
             # Parse line
             # Date, Station, Train number, Transport company, Train type,
             # Destination, Delay in minutes, cancelled(1=yes, 0=no)
@@ -124,5 +125,9 @@ def get_paths(filepath):
     # shows all stations in it's path, instead of all but the final one.
     for i in range(len(all_paths)):
         all_paths[i] = [all_paths[i][0][0] + [abbr(all_paths[i][0][1], table)], all_paths[i][1]]
+
+    f = open("data/ns_paths.txt", "w+")
+    for path in all_paths:
+        f.write(' '.join(path[0]) + ", " + ' '.join(path[1]) + '\n')
 
     return all_paths

@@ -66,7 +66,7 @@ def create_graph():
     ax.scatter(x_values, y_values)
 
     for i, txt in enumerate(texts):
-        ax.annotate(txt, (x_values[i], y_values[i]))
+        ax.annotate(txt, (x_values[i], y_values[i]), size=10)
 
     # Plot edges
     for edge in edges:
