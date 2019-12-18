@@ -28,7 +28,16 @@ def get_coords2(node, coords, edges):
     return [x, y]
 
 def create_graph():
+    # Execute get_paths once for the ns_paths file. If ns_data exists, you
+    # can turn off the line below.
     paths = [p[0] for p in get_paths("data/ns.csv")]
+    all_paths = []
+    f = open("data/ns_paths.txt")
+    for line in f:
+        split = line.split(',')
+        all_paths.append([split[0].split(' '), split[1].replace('\n', '').split(' ')[1:]])
+    paths = [p[0] for p in all_paths]
+
     stations = station_data()
 
     # Get all edges and nodes of the graph
