@@ -86,14 +86,18 @@ def create_graph():
 
     d = dict(G.degree)
     G.add_weighted_edges_from(weighted_edges)
+    for i in range(len(nodes)):
+        coord = tuple(node_coords[i][0])
+        name = node_coords[i][1]
+        G.add_node(name, pos=coord)
+    pos=nx.get_node_attributes(G,'pos')
 
     img = plt.imread("NLmap.gif")
     fig, ax = plt.subplots()
+    #trial and error for correct values imshow
     ax.imshow(img, extent=[3.35,7.15,50.7,53.5])
 
-    # ax.imshow(img, extent=[3.2,7.2,50.7,53.5])
-
-    nx.draw(G,pos,node_size=10, with_labels=True, font_size = 7)
+    nx.draw(G,pos,node_size=10, with_labels=False, font_size = 7)
     plt.show()
 
 create_graph()
