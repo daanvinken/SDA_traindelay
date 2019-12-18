@@ -59,6 +59,6 @@ xs = np.arange(-0.04, 0.16, 0.001)
 ys = st.norm.pdf(xs, loc=relative_mean, scale=relative_std)
 
 plt.hist(relative_delays, 20, density=True, label="percentage of trains delayed at least 5 minutes per station")
-plt.plot(xs, ys, alpha=0.5, label="normal distribution with calculated delayed mean and stddev from sample")
+plt.plot(xs, ys, label="normal distribution with calculated delayed mean and stddev from sample")
 plt.legend()
 plt.show()

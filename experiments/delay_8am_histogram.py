@@ -60,7 +60,7 @@ xs = range(0, 2500)
 ys = st.norm.pdf(xs, loc=delayed_mean, scale=delayed_std)
 
 plt.hist(delayed, 20, density=True, label="Amount of delayed stops at 8am per weekday")
-plt.plot(xs, ys, alpha=0.5, label="normal distribution with calculated delayed mean and stddev from sample")
+plt.plot(xs, ys, label="normal distribution with calculated delayed mean and stddev from sample")
 
 plt.legend()
 plt.show()
