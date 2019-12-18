@@ -30,7 +30,8 @@ def get_coords2(node, coords, edges):
 def create_graph():
     # Execute get_paths once for the ns_paths file. If ns_data exists, you
     # can turn off the line below.
-    paths = [p[0] for p in get_paths("data/ns.csv")]
+    # get_paths("data/ns.csv")
+
     all_paths = []
     f = open("data/ns_paths.txt")
     for line in f:
