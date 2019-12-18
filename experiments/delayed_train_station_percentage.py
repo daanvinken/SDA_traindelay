@@ -42,7 +42,7 @@ for s in stations:
         name = name_table[s]
     else:
         name = s
-    station_delays.append([name, delay_per_stop, stations[s][1]])
+    station_delays.append([name, delay_per_stop, stations[s][1], s])
 
 station_delays = [s for s in station_delays if s[2] >= 10000]
 station_delays = sorted(station_delays, key = lambda x: x[1], reverse=True)
