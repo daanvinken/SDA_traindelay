@@ -81,9 +81,7 @@ def create_graph():
     for edge_key in edges.keys():
         #convert edge to tuple, (x, y, weight)
         weight = edges[edge_key]
-        print(edge_key)
         edge = edge_key + ({'weight': weight**2},)
-        print(edge)
         weighted_edges.append(edge)
 
     d = dict(G.degree)
