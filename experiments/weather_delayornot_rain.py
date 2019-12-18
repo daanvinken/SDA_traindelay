@@ -78,9 +78,10 @@ fig, ax1 = plt.subplots()
 ax1.plot(rainlist, 'b-')
 ax1.tick_params('y', colors='b')
 ax2 = ax1.twinx()
-ax2.plot(*zip(*sorted(total_trains.items())), label="total trains", color='r')
-ax2.tick_params('y', colors='r')
 
+ax2.tick_params('y', colors='r')
+ax2.plot(*zip(*sorted(total_trains.items())), label="total trains", color='r')
 fig.tight_layout()
-plt.title("Blue line, rain in mm on a day. Red line percentage of delayed trains on a day")
+plt.title("Blue line, rain in mm on a day. Red line number of delayed trains on a day")
 plt.show()
+

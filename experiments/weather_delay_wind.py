@@ -25,10 +25,6 @@ obsolete_dates_w = ['20180903', '20181225', '20181226','20181231', '20190101',
 
 # Dictionary contains dates as keys and occurences as values
 total_trains = {}
-
-print(len(obsolete_dates))
-print(len(other_outliers))
-print(len(obsolete_dates_w))
 with open("../data/vertrektijden.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=";")
 
