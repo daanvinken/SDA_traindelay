@@ -79,34 +79,14 @@ for date in delayed_trains:
 xs = list(delays.keys())
 ys = [y[1] for y in delays.values()]
 
+f = plt.figure()
+
 plt.scatter(xs, ys, marker='.')
+plt.plot(np.unique(xs), np.poly1d(np.polyfit(xs, ys, 1))(np.unique(xs)), 'r')
 
-# solve for a and b
-def best_fit(X, Y):
-
-    xbar = sum(X)/len(X)
-    ybar = sum(Y)/len(Y)
-    n = len(X) # or len(Y)
-
-    numer = sum([xi*yi for xi,yi in zip(X, Y)]) - n * xbar * ybar
-    denum = sum([xi**2 for xi in X]) - n * xbar**2
-
-    b = numer / denum
-    a = ybar - b * xbar
-
-    print('best fit line:\ny = {:.2f} + {:.2f}x'.format(a, b))
-
-    return a, b
-
-# plt.plot(np.unique(xs), np.poly1d(np.polyfit(xs, ys, 1))(np.unique(xs)), 'r')
-# plt.hist(xs)
 plt.xlabel("Number of delays")
 plt.ylabel("Number of canceled trains")
 
-a, b = best_fit(xs, ys)
+plt.show()
 
-
-yfit = [a + b * xi for xi in xs]
-plt.plot(xs, yfit, 'r')
-# plt.show()
-plt.savefig('../results/canceled_per_delay2.png', bbox_inches='tight')
+f.savefig('../results/canceled_per_delay.png', bbox_inches='tight')
