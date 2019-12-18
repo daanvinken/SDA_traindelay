@@ -1,5 +1,7 @@
+import networkx as nx
 from trajecten import get_paths
 from trajecten import station_data
+
 
 import matplotlib.pyplot as plt
 
@@ -28,8 +30,7 @@ def get_coords2(node, coords, edges):
 def create_graph():
     # Execute get_paths once for the ns_paths file. If ns_data exists, you
     # can turn off the line below.
-
-    # get_paths("data/ns.csv")
+    paths = [p[0] for p in get_paths("data/ns.csv")]
     all_paths = []
     f = open("data/ns_paths.txt")
     for line in f:
@@ -41,7 +42,7 @@ def create_graph():
 
     # Get all edges and nodes of the graph
     nodes = []
-    edges = []
+    edges = {}
     for p in paths:
         for i in range(len(p)):
             # Append to nodes
@@ -51,8 +52,10 @@ def create_graph():
             # Append to edges
             if i != 0:
                 previous_node = p[i - 1]
-                if [previous_node, current_node] not in edges:
-                    edges.append([previous_node, current_node])
+                if (previous_node, current_node) not in edges.keys():
+                    edges[(previous_node, current_node)] = 1
+                else:
+                    edges[(previous_node, current_node)] = edges[(previous_node, current_node)] + 1
 
     # Get node coordinates
     node_coords = []
@@ -67,25 +70,32 @@ def create_graph():
         x, y = coord
         node_coords.append([[x, y], node])
 
-    # Plot nodes
-    x_values = [c[0][0] for c in node_coords]
-    y_values = [c[0][1] for c in node_coords]
-    texts = [c[1] for c in node_coords]
+    G = nx.Graph()
+    for i in range(len(nodes)):
+        coord = tuple(node_coords[i][0])
+        name = node_coords[i][1]
+        G.add_node(name, pos=coord)
+    pos=nx.get_node_attributes(G,'pos')
 
+    weighted_edges = []
+    for edge_key in edges.keys():
+        #convert edge to tuple, (x, y, weight)
+        weight = edges[edge_key]
+        print(edge_key)
+        edge = edge_key + ({'weight': weight**2},)
+        print(edge)
+        weighted_edges.append(edge)
+
+    d = dict(G.degree)
+    G.add_weighted_edges_from(weighted_edges)
+
+    img = plt.imread("download.gif")
     fig, ax = plt.subplots()
-    ax.scatter(x_values, y_values)
+    ax.imshow(img, extent=[3.35,7.15,50.7,53.5])
 
-    for i, txt in enumerate(texts):
-        ax.annotate(txt, (x_values[i], y_values[i]), size=10)
+    # ax.imshow(img, extent=[3.2,7.2,50.7,53.5])
 
-    # Plot edges
-    for edge in edges:
-        n1_coords = [[coord[0][0], coord[0][1]] for coord in node_coords if coord[1] == edge[0]][0]
-        n2_coords = [[coord[0][0], coord[0][1]] for coord in node_coords if coord[1] == edge[1]][0]
-        x_values = [n1_coords[0], n2_coords[0]]
-        y_values = [n1_coords[1], n2_coords[1]]
-
-        plt.plot(x_values, y_values, color='grey', linewidth=0.5)
-
+    nx.draw(G,pos,node_size=10, with_labels=True, font_size = 7)
     plt.show()
+
 create_graph()
