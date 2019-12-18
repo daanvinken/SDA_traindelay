@@ -38,7 +38,7 @@ with open("../data/vertrektijden.csv") as vertrektijden:
 
         if int(delay) > 0:
             delayed_trains_1[date] = delayed_trains_1[date] + 1
-        
+
         if int(delay) > 9:
             delayed_trains_10[date] = delayed_trains_10[date] + 1
 
