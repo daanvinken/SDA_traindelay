@@ -30,7 +30,8 @@ def get_coords2(node, coords, edges):
 def create_graph():
     # Execute get_paths once for the ns_paths file. If ns_data exists, you
     # can turn off the line below.
-    paths = [p[0] for p in get_paths("data/ns.csv")]
+    # get_paths("data/ns.csv")
+
     all_paths = []
     f = open("data/ns_paths.txt")
     for line in f:
@@ -81,15 +82,13 @@ def create_graph():
     for edge_key in edges.keys():
         #convert edge to tuple, (x, y, weight)
         weight = edges[edge_key]
-        print(edge_key)
         edge = edge_key + ({'weight': weight**2},)
-        print(edge)
         weighted_edges.append(edge)
 
     d = dict(G.degree)
     G.add_weighted_edges_from(weighted_edges)
 
-    img = plt.imread("download.gif")
+    img = plt.imread("NLmap.gif")
     fig, ax = plt.subplots()
     ax.imshow(img, extent=[3.35,7.15,50.7,53.5])
 
