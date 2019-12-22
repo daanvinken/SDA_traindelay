@@ -14,21 +14,20 @@ Besides creating the necessary data, this file will also look for any missing mo
 Experiments can be run by navigating to the `experiments` folder and running Python scripts from here. The results are both stored as `.png` images in the `results` folder, as well as shown as an interactive figure.
 
 ### Descriptions
-- `amount_stops_vs_delays_per_day.py`: Experiment description
-- `canceled_per_delay.py`: Generate a scatter plot of the number of delayed stops versus the number of canceled trains
+- `amount_stops_vs_delays_per_day.py`: Scatter plot with amount of stops made per day versus amount of delayed stops made per day
+- `canceled_per_delay.py`: Scatter plot of the number of delayed stops versus the number of canceled trains
 - `correlation_trackdelays.py`: Experiment description
-- `delay_11pm_histogram.py`: Experiment description
-- `delay_1pm_histogram.py`: Experiment description
-- `delay_5pm_histogram.py`: Experiment description
-- `delay_8am_histogram.py`: Experiment description
-- `delay_distribution.py`: Experiment description
+- `delay_1pm_histogram.py`: Histogram showing amount of delayed stops per weekday at 11 PM
+- `delay_11pm_histogram.py`: Histogram showing amount of delayed stops per weekday at 1 PM
+- `delay_5pm_histogram.py`: Histogram showing amount of delayed stops per weekday at 5 PM
+- `delay_8am_histogram.py`: Histogram showing amount of delayed stops per weekday at 8 AM
 - `delay_histogram.py`: Experiment description
-- `delay_histogram2.py`: Experiment description
-- `delay_histogram_log.py`: Experiment description
+- `delay_histogram2.py`: Histogram showing amount of delayed stops per weekday
+- `delay_histogram_log.py`: Histogram showing log amount of delayed stops per weekday
 - `delay_time_distribution.py`: Fit the exponential distribution over the frequency of _x_ minutes delay
 - `delayed_per_total.py`: Show amount of delayed stops versus the total number of stops for every company in the data set.
 - `delayed_train_station_percentage.py`: Experiment description
-- `hourly.py`: Experiment description
+- `hourly.py`: Plot showing amount of (delayed) trains per hour of the day
 - `normalize_wind_delay.py`: Experiment description
 - `normalized_rain_delay.py`: Experiment description
 - `overtime.py`: Experiment description
