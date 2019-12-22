@@ -119,9 +119,9 @@ if (not destinationFile):
     exit()
 
 # we always use the same source file
-with open('../data/vertrektijden.csv') as source_file:
-    with open('../data/' + destinationFile, 'w') as dest_file:
-        reader = csv.reader(source_file, delimiter=";")
+with open('data/vertrektijden.csv') as source_file:
+    with open('data/' + destinationFile, 'w') as dest_file:
+        reader = csv.reader(source_file, delimiter=",")
         writer = csv.writer(dest_file)
 
         # index we need for keeping track of the limit

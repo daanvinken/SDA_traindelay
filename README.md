@@ -1,34 +1,20 @@
-# SDA
+# Scientific Data Analysis 2019/2020
 
-## Members
+The following descriptions describe how to generate the data required for running the experiments conducted during this project.
+
+## Specifications
+All experiments were run on the Linux operating system, using Ubuntu 16.04 up to Ubuntu 19.10. Experiments require at least Python 3, preferably Python 3.7 or higher.
+
+## Setting up
+Our experiments rely on data files of Gigabytes in size. Since Canvas can not handle files of these sizes, we are forced to store our source data on external services.
+Our data generating file, `data_generator.py`, relies on Python 3.7.5. It can be run as follows: `python3 data_generator.py`.
+Besides creating the necessary data, this file will also look for any missing modules on the user's system and list these. These modules must be installed manually using `pip3 install`.
+
+## Experiments
+Experiments can be run by navigating to the `experiments` folder and running Python scripts from here. The results are both stored as `.png` images in the `results` folder, as well as shown as an interactive figure.
+
+## Contributors
 Daan Vinken
 Joël Buter
 Ricardo van Aken
 Jesse Postema
-
-## Research questions
-Can we correctly predict train delays using historical data?
-
-## Dataset
-Our dataset consists of departure times of trains, containing info like:
-departure time (timestamp), station (location) and delay (difference between planned and actual departure time) and more, like trainnumber, whether it was cancelled or not etc.
-
-The daterange of this data is that of the entire past year.
-
-## Time planning
-Week 1:
-Gather data. Current source is treinposities.nl (https://treinposities.nl/vertrekstaat), and possibly from NS (https://apiportal.ns.nl/).
-Familiarize and vizualise the data, to see if we can find possible probable hypotheses.
-
-Week 2:
-Formulize hypotheses, start testing hypotheses.
-
-Week 3:
-Further testing of hypotheses, if possible implement nice-to-have's, such as using additional data sources, for example weather data.
-
-Week 4:
-Finish implementing tests and nice-to-haves, make presentation.
-
-## Sources
-van der Breggen, L. P. A., et al. "Voorspellingsmodel voor treinvertragingen." (2015).
-
