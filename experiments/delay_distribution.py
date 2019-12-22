@@ -38,7 +38,7 @@ week_days= ['Monday', 'Tuesday','Wednesday', 'Thursday', 'Friday', 'Saturday','S
 for day in week_days:
     days_delay_list = []
     with open('../data/delay.csv') as source_file:
-        reader = csv.reader(source_file, delimiter=",")
+        reader = csv.reader(source_file, delimiter=";")
         current_date = reader.__next__()[0]
         delay_counter=0
         for row in reader:
@@ -72,13 +72,4 @@ ax7.hist(total_days_delay_list[6], bins=bins)
 for ax in axs.flat:
     ax.label_outer()
 plt.show()
-
-
-# plt.hist(days_delay_list[1:], bins=bins, color='blue')
-# # plt.hist(day2list,bins=bins, color='red')
-# # plt.yscale("log")
-# # plt.xscale("log")
-# plt.xlabel("Delay per " + str(filter_day1))
-# plt.ylabel("Occurences")
-# plt.show()
 
