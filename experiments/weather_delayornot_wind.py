@@ -1,4 +1,3 @@
-#plot showing amount of stops and delays per date (total), filtering out weekends for smoother lines
 import matplotlib.pyplot as plt
 import csv
 import datetime
@@ -9,7 +8,7 @@ columns = [
 ]
 
 #ive added some extra outliers, but i don't know why they exist yet.
-# So maybe they should be included.
+# So maybe they should be excluded.
 obsolete_dates = ['2018-09-03', '2018-12-25', '2018-12-26','2018-12-31', '2019-01-01',
 '2019-04-19', '2019-04-21', '2019-04-22','2019-05-05','2019-05-28', '2019-05-30',
  '2019-06-09','2019-06-10', '2019-11-26']
@@ -28,7 +27,7 @@ total_trains = {}
 total_delayed_trains = {}
 
 with open("../data/vertrektijden.csv") as vertrektijden:
-    reader = csv.reader(vertrektijden, delimiter=";")
+    reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
 
@@ -70,9 +69,6 @@ for date in total_trains.keys():
     factor = (total_delayed_trains[str(date)] / (total_delayed_trains[str(date)] + total_trains[str(date)]))*100
     percentage_delayed_per_day.append(factor)
 
-print(len(percentage_delayed_per_day))
-print(len(rainlist))
-
 fig, ax1 = plt.subplots()
 ax1.plot(rainlist, 'b-')
 ax1.tick_params('y', colors='b')
@@ -82,4 +78,6 @@ ax2.tick_params('y', colors='r')
 
 fig.tight_layout()
 plt.title("Blue line, Highest average (per hour) wind speed. Red line number of delayed trains on a day")
+plt.xlabel("Days in data")
+plt.ylabel("Wind speed [m/s] (left) -- No. of delayed trains (right)")
 plt.show()

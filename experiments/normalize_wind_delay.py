@@ -85,5 +85,7 @@ for value in percentage_delayed_per_day:
 plt.plot(rainlist, label="Normalized highest windspeed (average of an hour)", color='b')
 plt.plot(normalized_percentages, label="Normalized percentage of delayed trains per day", color='r')
 plt.title("Blue line, Highest average (per hour) wind speed. Red line percentage of delayed trains on a day. \n Both normalized.")
+plt.xlabel("Days in data")
+plt.ylabel("Wind speed [m/s] (left) -- Normalized no. of delayed trains (right)")
 plt.legend()
 plt.show()
