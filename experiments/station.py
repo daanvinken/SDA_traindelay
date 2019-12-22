@@ -16,7 +16,6 @@ with open("../data/vertrektijden.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
-
         station = line[columns.index("station")]
 
         delay = line[columns.index("delay")]

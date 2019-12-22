@@ -17,7 +17,6 @@ with open("../data/vertrektijden.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
-
         date = line[columns.index("date")]
         delay = line[columns.index("delay")]
         year, month, day = date.split("-")
@@ -49,7 +48,7 @@ for key in total_trains.keys():
     if (weekday == 5):
         total_sat.append(total_trains[key])
     else:
-        total_sun.append(total_trains[key])       
+        total_sun.append(total_trains[key])
 
 for i in range(len(total_sat)):
     total_diffs.append(total_sat[i] - total_sun[i])
@@ -61,7 +60,7 @@ for key in delayed_trains.keys():
     if (weekday == 5):
         delayed_sat.append(delayed_trains[key])
     else:
-        delayed_sun.append(delayed_trains[key])       
+        delayed_sun.append(delayed_trains[key])
 
 for i in range(len(delayed_sat)):
     delayed_diffs.append(delayed_sat[i] - delayed_sun[i])
