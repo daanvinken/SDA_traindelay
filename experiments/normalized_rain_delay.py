@@ -82,6 +82,8 @@ for value in percentage_delayed_per_day:
 plt.plot(normalized_rain, label="Normalized rain in mm on a day", color='b')
 plt.plot(normalized_percentages, label="Normalized percentage of delayed trains per day", color='r')
 plt.legend()
+plt.xlabel("Days in data")
+plt.ylabel("Rain [mm] (left) -- Normalized no. of delayed trains (right)")
 plt.show()
 
 

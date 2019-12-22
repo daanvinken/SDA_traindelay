@@ -28,7 +28,7 @@ obsolete_dates_w = ['20180903', '20181225', '20181226','20181231', '20190101',
 total_trains = {}
 
 with open("../data/vertrektijden.csv") as vertrektijden:
-    reader = csv.reader(vertrektijden, delimiter=";")
+    reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
 
@@ -70,4 +70,6 @@ ax2.tick_params('y', colors='r')
 
 fig.tight_layout()
 plt.title("Blue line, rain in mm on a day. Red line minutes of delay on one day.")
+plt.xlabel("Days in data")
+plt.ylabel("Rain [mm] (left) -- Total minuts delay (right)")
 plt.show()

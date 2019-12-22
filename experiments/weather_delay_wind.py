@@ -26,7 +26,7 @@ obsolete_dates_w = ['20180903', '20181225', '20181226','20181231', '20190101',
 # Dictionary contains dates as keys and occurences as values
 total_trains = {}
 with open("../data/vertrektijden.csv") as vertrektijden:
-    reader = csv.reader(vertrektijden, delimiter=";")
+    reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
 
@@ -53,11 +53,6 @@ with open("../data/wind_per_uur.txt") as neerslag:
         rain = int(line[2])
         if (weekday >=5): continue
         rainlist.append(int(rain))
-print("lengths " + str(len(total_trains)))
-print("lengthss " + str(len(rainlist)))
-
-
-
 
 fig, ax1 = plt.subplots()
 ax1.plot(rainlist, 'b-')
@@ -68,4 +63,6 @@ ax2.tick_params('y', colors='r')
 
 fig.tight_layout()
 plt.title("Blue line, Highest average (per hour) wind speed. Red line minutes of delay on one day.")
+plt.xlabel("Days in data")
+plt.ylabel("Wind speed [m/s] (left)  -- Total minuts delay (right)")
 plt.show()

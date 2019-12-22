@@ -29,7 +29,7 @@ total_trains = {}
 total_delayed_trains = {}
 
 with open("../data/vertrektijden.csv") as vertrektijden:
-    reader = csv.reader(vertrektijden, delimiter=";")
+    reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
 
@@ -82,5 +82,7 @@ ax2.plot(percentage_delayed_per_day, label="total trains", color='r')
 ax2.tick_params('y', colors='r')
 fig.tight_layout()
 plt.title("Blue line, rain in mm on a day. Red line percentage of delayed trains on a day")
+plt.xlabel("Days in data")
+plt.ylabel("Rain [mm] (left) -- Percentage delayed trains (right)")
 plt.show()
 
