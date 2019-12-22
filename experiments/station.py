@@ -32,9 +32,10 @@ with open("../data/vertrektijden.csv") as vertrektijden:
             else:
                 delayed_trains[station] = delayed_trains[station] + 1
 
-plt.bar(*zip(*total_trains.items()), align='center', label="total amount of stops")
-plt.bar(*zip(*delayed_trains.items()), align='center', label="amount of delayed stops")
+plt.bar(*zip(*total_trains.items()), align='center', label="Normal stops")
+plt.bar(*zip(*delayed_trains.items()), align='center', label="Delayed stops")
 plt.tick_params(axis='x', labelbottom=False, bottom=False)
-plt.xlabel("different stations")
+plt.xlabel("Stations")
+plt.ylabel("Occurences")
 plt.legend()
 plt.show()
