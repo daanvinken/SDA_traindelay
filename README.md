@@ -37,8 +37,8 @@ Experiments can be run by navigating to the `experiments` folder and running Pyt
 - `overtime_weekend.py`: Experiment description
 - `overtime_weekend_diffs.py`: Experiment description
 - `station.py`: Experiment description
-- `station_relative.py`: Experiment description
-- `station_relative_5.py`: Experiment description
+- `station_relative.py`: Histogram showing amount of delays divided by stops per station
+- `station_relative_5.py`: Histogram showing amount of delays of more than 5 minutes divided by stops per station
 - `train_type_delays.py`: Show a bar plot with the amount of delays for every carrier type of the NS
 - `weather_delay_rain.py`: Experiment description
 - `weather_delay_wind.py`: Experiment description
