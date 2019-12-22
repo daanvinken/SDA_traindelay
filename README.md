@@ -17,37 +17,37 @@ Experiments can be run by navigating to the `experiments` folder and running Pyt
 - `amount_stops_vs_delays_per_day.py`: Experiment description
 - `canceled_per_delay.py`: Generate a scatter plot of the number of delayed stops versus the number of canceled trains
 - `correlation_trackdelays.py`: Experiment description
-- `delay_11pm_histogram.py`: Experiment description
-- `delay_1pm_histogram.py`: Experiment description
-- `delay_5pm_histogram.py`: Experiment description
-- `delay_8am_histogram.py`: Experiment description
+- `delay_11pm_histogram.py`: Plot to find the delay distribution at 11:00 pm
+- `delay_1pm_histogram.py`: Plot to find the delay distribution at 1:00 pm
+- `delay_5pm_histogram.py`: Plot to find the delay distribution at 5:00 pm
+- `delay_8am_histogram.py`: Plot to find the delay distribution at 8:00 am
 - `delay_distribution.py`: Experiment description
 - `delay_histogram.py`: Experiment description
 - `delay_histogram2.py`: Experiment description
-- `delay_histogram_log.py`: Experiment description
+- `delay_histogram_log.py`: Experiment where log values are taken to prove that the overal delay (in minutes) follows a lognormal distribution (incl. ks test).
 - `delay_time_distribution.py`: Fit the exponential distribution over the frequency of _x_ minutes delay
 - `delayed_per_total.py`: Show amount of delayed stops versus the total number of stops for every company in the data set.
 - `delayed_train_station_percentage.py`: Experiment description
 - `hourly.py`: Experiment description
-- `normalize_wind_delay.py`: Experiment description
-- `normalized_rain_delay.py`: Experiment description
+- `normalize_wind_delay.py`: Plot to find the relation between the windspeed in the Netherlands and the number of delayed trains, both on a single day and normalized.
+- `normalized_rain_delay.py`: Plot to find the relation between the rain in the Netherlands and the number of delayed trains, both on a single day and normalized.
 - `overtime.py`: Experiment description
 - `overtime_montues_diffs.py`: Experiment description
 - `overtime_weekday.py`: Experiment description
-- `overtime_weekday_filtered.py`: Experiment description
+- `overtime_weekday_filtered.py`: Experiment on amount of delayed stops per weekday, with a ks test for normal distribution.
 - `overtime_weekend.py`: Experiment description
-- `overtime_weekend_diffs.py`: Experiment description
+- `overtime_weekend_diffs.py`: Experiment descriptionx
 - `station.py`: Experiment description
 - `station_relative.py`: Experiment description
 - `station_relative_5.py`: Experiment description
 - `train_type_delays.py`: Show a bar plot with the amount of delays for every carrier type of the NS
-- `weather_delay_rain.py`: Experiment description
-- `weather_delay_wind.py`: Experiment description
+- `weather_delay_rain.py`: Plot to find the relation between the rain in the Netherlands and the minutes of delay of all trains, both on a single day.
+- `weather_delay_wind.py`: Plot to find the relation between the windspeed in the Netherlands and the minutes of delay of all trains, both on a single day.
 - `weather_delayornot_rain.py`: Experiment description
-- `weather_delayornot_rain_percentage.py`: Experiment description
-- `weather_delayornot_wind.py`: Experiment description
-- `weather_delayornot_wind_percentage.py`: Experiment description
-- `weekday.py`: Experiment description
+- `weather_delayornot_rain_percentage.py`: Plot to find the relation between the rain in the Netherlands and the number of delayed trains (percentage), both on a single day.
+- `weather_delayornot_wind.py`: Plot to find the relation between the rain in the Netherlands and the number of delayed trains, both on a single day.
+- `weather_delayornot_wind_percentage.py`: Plot to find the relation between the rain in the Netherlands and the number of delayed trains (percentage), both on a single day.
+- `weekday.py`: plot showing amount of stops and delays per weekday (total)
 - `weekdays.py`: Experiment description
 
 ## Contributors
