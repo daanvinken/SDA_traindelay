@@ -13,6 +13,44 @@ Besides creating the necessary data, this file will also look for any missing mo
 ## Experiments
 Experiments can be run by navigating to the `experiments` folder and running Python scripts from here. The results are both stored as `.png` images in the `results` folder, as well as shown as an interactive figure.
 
+### Descriptions
+- `weather_delay_rain.py`: Experiment description
+- `weekday.py`: Experiment description
+- `overtime.py`: Experiment description
+- `normalize_wind_delay.py`: Experiment description
+- `train_type_delays.py`: Experiment description
+- `delay_8am_histogram.py`: Experiment description
+- `delay_histogram2.py`: Experiment description
+- `overtime_weekday_filtered.py`: Experiment description
+- `weather_delay_wind.py`: Experiment description
+- `normalized_rain_delay.py`: Experiment description
+- `amount_stops_vs_delays_per_day.py`: Experiment description
+- `weather_delayornot_rain_percentage.py`: Experiment description
+- `delay_histogram_log.py`: Experiment description
+- `delayed_per_total.py`: Experiment description
+- `weather_delayornot_wind.py`: Experiment description
+- `weekdays.py`: Experiment description
+- `delay_11pm_histogram.py`: Experiment description
+- `overtime_weekend.py`: Experiment description
+- `weather_delayornot_wind_percentage.py`: Experiment description
+- `station.py`: Experiment description
+- `delay_time_distribution.py`: Experiment description
+- `station_relative.py`: Experiment description
+- `correlation_trackdelays.py`: Experiment description
+- `delay_1pm_histogram.py`: Experiment description
+- `hourly.py`: Experiment description
+- `get_files.py`: Experiment description
+- `station_relative_5.py`: Experiment description
+- `overtime_weekday.py`: Experiment description
+- `delay_5pm_histogram.py`: Experiment description
+- `weather_delayornot_rain.py`: Experiment description
+- `canceled_per_delay.py`: Experiment description
+- `delay_distribution.py`: Experiment description
+- `delayed_train_station_percentage.py`: Experiment description
+- `delay_histogram.py`: Experiment description
+- `overtime_montues_diffs.py`: Experiment description
+- `overtime_weekend_diffs.py`: Experiment description
+
 ## Contributors
 Daan Vinken
 Joël Buter
