@@ -4,11 +4,13 @@ import csv
 import datetime
 import numpy as np
 
+# Intuitive way of getting the right column from csv
 columns = [
     "date", "station", "trainnumber", "company",
     "traintype", "destination", "time", "delay", "canceled"
 ]
 
+# Outlier dates, such as holidays and strikes
 obsolete_dates = [
     "2018-09-03", "2018-12-25", "2018-12-26","2018-12-31", "2019-01-01",
     "2019-04-19", "2019-04-21", "2019-04-22","2019-05-05","2019-05-28",
@@ -19,32 +21,36 @@ obsolete_dates = [
 delayed_trains = {}
 canceled_trains = {}
 
-# with open("../data/ALL_trains_2019_08_01_to_2019_11_01.csv") as vertrektijden:
 with open("../data/vertrektijden.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
         date = line[columns.index("date")]
 
+        # Make sure we don't use any obsolete dates
         if date in obsolete_dates:
             continue
 
         year, month, day = date.split("-")
         weekday = datetime.date(int(year), int(month), int(day)).weekday()
 
-        # filtering out weekends
+        # Filtering out weekends
         if (weekday >= 5): continue
 
         delay = line[columns.index("delay")]
         canceled = line[columns.index("canceled")]
 
+        # Initialize number of times a train was delayed at a stop on
+        # a specific date.
         if date not in delayed_trains:
             delayed_trains[date] = 0
 
+        # Initialize number of times a train was canceled on a specific
+        # date.
         if date not in canceled_trains:
             canceled_trains[date] = 0
 
-        # Number of stops with delay:
+        # Number of stops with delay
         if int(delay) >= 1:
             delayed_trains[date] += 1
 
@@ -54,7 +60,8 @@ with open("../data/vertrektijden.csv") as vertrektijden:
 
 delays = {}
 
-# Iterate over all dates (canceled and delayed have same dates)
+# Iterate over all dates (canceled and delayed have same dates by way
+# of our implementation)
 for date in delayed_trains:
     delay_frequency = delayed_trains[date]
     canceled_frequency = canceled_trains[date]
@@ -70,13 +77,10 @@ for date in delayed_trains:
         avg = (freqs + canceled_frequency) / count
         delays[delay_frequency] = (count, avg)
 
-# sort = {}
-
-# Sort delay frequencies for better plotting
-# for i in sorted(list(delays.keys())):
-#     sort[i] = delays[i]
-
+# Get all delays on the x-axis
 xs = list(delays.keys())
+
+# Get the corresponding canceled trains on the y-axis
 ys = [y[1] for y in delays.values()]
 
 f = plt.figure()
@@ -89,4 +93,4 @@ plt.ylabel("Number of canceled trains")
 
 plt.show()
 
-f.savefig('../results/canceled_per_delay.pdf', bbox_inches='tight')
+f.savefig('../results/canceled_per_delay.png', bbox_inches='tight')
