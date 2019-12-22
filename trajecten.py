@@ -53,18 +53,13 @@ def abbr(name, table):
     print("couldn't find abbreviation for", name)
     return []
 
+# Get all train paths and their train numbers in a list
 def get_paths(filepath):
     train_routes = {}
     all_paths = []
-    i = 0
 
     with open(filepath) as FileObj:
         for line in FileObj:
-            # if (i > 100000):
-            #     break
-            # else:
-            #     i += 1
-
             # Parse line
             # Date, Station, Train number, Transport company, Train type,
             # Destination, Delay in minutes, cancelled(1=yes, 0=no)

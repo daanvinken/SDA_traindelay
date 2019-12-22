@@ -102,6 +102,22 @@ if not os.path.isfile(dest_folder + '/ns_paths.txt'):
 else:
     print(dest_folder + "/ns_paths.txt", "already exists, skipping")
 
+if not os.path.isfile(dest_folder + '/ams_centraal.csv'):
+    print("Generating file with delayed trains...")
+
+    try:
+        subprocess.check_call([
+            "python3",
+            "split.py",
+            "--station=ASD"
+        ])
+    except subprocess.CalledProcessError:
+        print("Failed to generate file with delayed NS trains, aborting")
+
+        sys.exit()
+else:
+    print(dest_folder + "/ams_centraal.csv", "already exists, skipping")
+
 if not os.path.isfile(dest_folder + '/neerslag.txt'):
     print("[WARNING]: Could not find", dest_folder + '/neerslag.txt')
     print("Did you download the project correctly?")

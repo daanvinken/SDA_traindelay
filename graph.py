@@ -29,6 +29,7 @@ def get_coords2(node, coords, edges):
     y = sum([c[1] for c in connected_coords]) / len(connected_coords)
     return [x, y]
 
+# Create a graph given all possible train paths
 def create_graph():
     # Execute get_paths once for the ns_paths file.
     f = open("data/ns_paths.txt")
