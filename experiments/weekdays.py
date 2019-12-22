@@ -47,8 +47,6 @@ with open('../data/delay.csv') as source_file:
         cancelled = int(row[8])
         if (vertraging <= max_delay):
             delayList.append(vertraging)
-            if (vertraging > 30):
-                print(row)
 
 
 plt.hist(delayList, bins=bins)
