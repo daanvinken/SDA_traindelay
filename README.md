@@ -1,6 +1,6 @@
 # Scientific Data Analysis 2019/2020
 
-The following descriptions describe how to generate the data required for running the experiments conducted during this project.
+The following instructions describe how to generate the data required for running the experiments conducted during this project.
 
 ## Specifications
 All experiments were run on the Linux operating system, using Ubuntu 16.04 up to Ubuntu 19.10. Experiments require at least Python 3, preferably Python 3.7 or higher.
