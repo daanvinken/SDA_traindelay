@@ -24,7 +24,7 @@ for i in types:
 for i in types:
     total_trains[i] = 0;
 
-with open("../data/NS_trains_2019_08_01_to_2019_11_01.csv") as vertrektijden:
+with open("../data/ns_vertrektijden.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:

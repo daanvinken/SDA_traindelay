@@ -89,4 +89,4 @@ plt.ylabel("Number of canceled trains")
 
 plt.show()
 
-f.savefig('../results/canceled_per_delay.png', bbox_inches='tight')
+f.savefig('../results/canceled_per_delay.pdf', bbox_inches='tight')
