@@ -1,8 +1,8 @@
-# plot showing a scatterplot between amount of stops made per day, and amount of delayed stops made per day
 import matplotlib.pyplot as plt
 import csv
 import numpy as np
 
+# Provides for intuitive way of getting the right column from csv
 columns = [
     "date", "station", "trainnumber", "company",
     "traintype", "destination", "time", "delay", "canceled"
@@ -12,15 +12,19 @@ columns = [
 total_trains = {}
 delayed_trains = {}
 
+# All carrier types the NS uses
 types = [
-    'Extra trein', 'Stopbus i.p.v. trein', 'Snelbus i.p.v. trein',
-    'Sprinter', 'Intercity direct', 'Intercity', 'Bus', 'Speciale Trein',
-    'Int. Trein', 'Eurostar', 'Thalys', 'ICE International'
+    'Extra trein', 'Sprinter', 'Intercity direct', 'Intercity',
+    'Speciale Trein', 'Int. Trein', 'Eurostar', 'Thalys', 'ICE International'
 ]
 
+# Initialize number of delayed stops that were made by
+# a carrier from NS
 for i in types:
     delayed_trains[i] = 0;
 
+# Initialize number of stops that were made by
+# a carrier from NS
 for i in types:
     total_trains[i] = 0;
 
@@ -31,27 +35,31 @@ with open("../data/ns_vertrektijden.csv") as vertrektijden:
         type = line[columns.index("traintype")];
         delay = line[columns.index("delay")]
 
-        total_trains[type] = total_trains[type] + 1
+        # Some carries types occur so little that we do not want
+        # list them in our plot.
+        if type not in total_trains:
+            continue
+
+        total_trains[type] += 1
 
         if int(delay) > 0:
-            delayed_trains[type] = delayed_trains[type] + 1
+            delayed_trains[type] += 1
 
-# plt.scatter(total_trains.values(), delayed_trains.values(), alpha=0.1)
-# plt.ylabel("Amount of delayed stops per day")
-# plt.xlabel("Amount of stops per day")
-# plt.show()
+ratio = [];
 
-performance = [];
-
+# Get ratio of delayed stops versus total number of stops
 for i in delayed_trains:
-    performance.append(delayed_trains[i] / total_trains[i])
+    ratio.append(delayed_trains[i] / total_trains[i])
 
 y_pos = np.arange(len(types))
 
 f = plt.figure()
 
-plt.bar(y_pos, performance, align='center')
+plt.bar(y_pos, ratio, align='center')
 plt.xticks(y_pos, types, rotation='vertical')
+plt.xlabel("Companies")
+plt.ylabel("Percentage delayed stops of total stops")
+
 plt.tight_layout()
 
 plt.show()
