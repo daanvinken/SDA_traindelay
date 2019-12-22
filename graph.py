@@ -81,6 +81,7 @@ def create_graph():
     for edge_key in edges.keys():
         #convert edge to tuple, (x, y, weight)
         weight = edges[edge_key]
+        #took the squared weights for better visibility
         edge = edge_key + ({'weight': weight**2},)
         weighted_edges.append(edge)
 
