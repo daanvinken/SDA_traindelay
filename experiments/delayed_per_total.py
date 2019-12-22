@@ -24,7 +24,7 @@ for i in companies:
 for i in companies:
     total_trains[i] = 0;
 
-with open("../data/ALL_trains_2019_08_01_to_2019_11_01.csv") as vertrektijden:
+with open("../data/vertrektijden.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:

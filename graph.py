@@ -30,12 +30,10 @@ def get_coords2(node, coords, edges):
     return [x, y]
 
 def create_graph():
-    # Execute get_paths once for the ns_paths file. If ns_data exists, you
-    # can turn off the line below.
-    # get_paths("data/ns.csv")
+    # Execute get_paths once for the ns_paths file.
+    f = open("data/ns_paths.txt")
 
     all_paths = []
-    f = open("data/ns_paths.txt")
     for line in f:
         split = line.split(',')
         all_paths.append([split[0].split(' '), split[1].replace('\n', '').split(' ')[1:]])

@@ -3,7 +3,6 @@ import scipy.stats as st
 import matplotlib.pyplot as plt
 import csv
 import datetime
-from collections import OrderedDict
 import numpy as np
 
 columns = [
