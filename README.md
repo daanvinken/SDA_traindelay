@@ -16,6 +16,7 @@ Experiments can be run by navigating to the `experiments` folder and running Pyt
 ### Descriptions
 - `amount_stops_vs_delays_per_day.py`: Scatter plot with amount of stops made per day versus amount of delayed stops made per day
 - `canceled_per_delay.py`: Scatter plot of the number of delayed stops versus the number of canceled trains
+- `correlation_trackdelays.py`: Time series of the total delay on station ASD(=Amsterdam Centraal)
 - `correlation_trackdelays.py`: Experiment description
 - `delay_1pm_histogram.py`: Histogram showing amount of delayed stops per weekday at 11:00 PM
 - `delay_11pm_histogram.py`: Histogram showing amount of delayed stops per weekday at 1:00 PM
@@ -47,6 +48,8 @@ Experiments can be run by navigating to the `experiments` folder and running Pyt
 - `weather_delayornot_wind_percentage.py`: Plot to find the relation between the rain in the Netherlands and the number of delayed trains (percentage), both on a single day.
 - `weekday.py`: Plot showing amount of stops and delays per weekday (total)
 - `weekdays.py`: Plotting delay in minutes on weekdays (excluding cancelled trains)
+- `trajecten.py`: Gets all different train paths and trains of the ns data
+- `graph.py`: Creates a graph based on the paths found in trajecten.py
 
 ## Contributors
 Daan Vinken, Joël Buter, Ricardo van Aken, Jesse Postema
