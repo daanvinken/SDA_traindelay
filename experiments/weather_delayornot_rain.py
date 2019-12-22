@@ -8,8 +8,7 @@ columns = [
     "traintype", "destination", "time", "delay", "cancelled"
 ]
 
-
-#ive added some extra outliers, but i don't know why they exist yet.
+# I've added some extra outliers, but i don't know why they exist yet.
 # So maybe they should be included.
 obsolete_dates = ['2018-09-03', '2018-12-25', '2018-12-26','2018-12-31', '2019-01-01',
 '2019-04-19', '2019-04-21', '2019-04-22','2019-05-05','2019-05-28', '2019-05-30',
@@ -53,6 +52,7 @@ with open("../data/vertrektijden.csv") as vertrektijden:
                 total_delayed_trains[date] = 1
 
 rainlist = []
+
 with open("../data/neerslag.txt") as neerslag:
     reader = csv.reader(neerslag, delimiter=",")
     for line in reader:
@@ -62,28 +62,23 @@ with open("../data/neerslag.txt") as neerslag:
         rain = int(line[2])
         if (weekday >=5): continue
         rainlist.append(int(rain))
-print("lengths " + str(len(total_trains)))
-print("lengthss " + str(len(rainlist)))
 
 percentage_delayed_per_day = []
 for date in total_trains.keys():
     factor = (total_delayed_trains[str(date)] / (total_delayed_trains[str(date)] + total_trains[str(date)]))*100
     percentage_delayed_per_day.append(factor)
 
-print(len(percentage_delayed_per_day))
-print(len(rainlist))
-
 
 fig, ax1 = plt.subplots()
-ax1.plot(rainlist, 'b-')
+ax1.plot(rainlist, 'b-', label="Rain in mm per day")
 ax1.tick_params('y', colors='b')
 ax2 = ax1.twinx()
 
 ax2.tick_params('y', colors='r')
-ax2.plot(*zip(*sorted(total_trains.items())), label="total trains", color='r')
+ax2.plot(*zip(*sorted(total_trains.items())), label="Delayed trains on a day", color='r')
 fig.tight_layout()
-plt.title("Blue line, rain in mm on a day. Red line number of delayed trains on a day")
+fig.legend()
 plt.xlabel("Days in data")
-plt.ylabel("Rain [mm] (left) -- No. of delayed trains (right)")
+ax1.set_ylabel("Rain [mm]")
+ax2.set_ylabel("No. of delayed trains")
 plt.show()
-
