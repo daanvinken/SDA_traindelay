@@ -28,7 +28,7 @@ total_trains = {}
 total_delayed_trains = {}
 
 with open("../data/vertrektijden.csv") as vertrektijden:
-    reader = csv.reader(vertrektijden, delimiter=";")
+    reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
 
@@ -51,38 +51,42 @@ with open("../data/vertrektijden.csv") as vertrektijden:
             else:
                 total_delayed_trains[date] = 1
 
+windlist = []
 
-
-rainlist = []
 with open("../data/wind_per_uur.txt") as neerslag:
     reader = csv.reader(neerslag, delimiter=",")
+
     for line in reader:
         date = str(line[1])
-        if ((str(date) in obsolete_dates_w)): continue
+
+        if str(date) in obsolete_dates_w: continue
+
         weekday = datetime.date(int(line[1][:4]), int(line[1][4:6]), int(line[1][6:8])).weekday()
         rain = int(line[2])
-        if (weekday >=5): continue
-        rainlist.append(int(rain))
 
+        if (weekday >= 5): continue
+
+        windlist.append(int(rain))
 
 percentage_delayed_per_day = []
+
 for date in total_trains.keys():
     factor = (total_delayed_trains[str(date)] / (total_delayed_trains[str(date)] + total_trains[str(date)]))*100
     percentage_delayed_per_day.append(factor)
 
-
 normalized_wind = []
+
 for wind in windlist:
-    x = wind/max(windlist) * 100
+    x = wind / max(windlist) * 100
     normalized_wind.append(x)
 
 normalized_percentages = []
+
 for value in percentage_delayed_per_day:
     x = value / max(percentage_delayed_per_day)* 100
     normalized_percentages.append(x)
 
-
-plt.plot(rainlist, label="Normalized highest windspeed (average of an hour)", color='b')
+plt.plot(windlist, label="Normalized highest windspeed (average of an hour)", color='b')
 plt.plot(normalized_percentages, label="Normalized percentage of delayed trains per day", color='r')
 plt.title("Blue line, Highest average (per hour) wind speed. Red line percentage of delayed trains on a day. \n Both normalized.")
 plt.xlabel("Days in data")

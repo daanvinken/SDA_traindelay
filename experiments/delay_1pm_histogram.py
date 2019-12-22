@@ -56,7 +56,8 @@ def stddev(sample, mean):
     for num in sample:
         diffs.append((num - mean)**2)
 
-    variance = sum(diffs)/len(diffs)
+    variance = sum(diffs) / len(diffs)
+
     return variance**0.5
 
 delayed_std = stddev(delayed, delayed_mean)
@@ -71,6 +72,7 @@ ys = st.norm.pdf(xs, loc=delayed_mean, scale=delayed_std)
 
 plt.hist(delayed, 20, density=True, label="Amount of delayed stops at 1pm per weekday")
 plt.plot(xs, ys, label="normal distribution with calculated delayed mean and stddev from sample")
+plt.title("Normalized frequencies of delayed stops at 1:00 PM per weekday")
 
 plt.legend()
 plt.show()

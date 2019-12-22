@@ -9,9 +9,12 @@ columns = [
     "traintype", "destination", "time", "delay", "canceled"
 ]
 
-obsolete_dates = ['2018-09-03', '2018-12-25', '2018-12-26','2018-12-31', '2019-01-01',
-'2019-04-19', '2019-04-21', '2019-04-22','2019-05-05','2019-05-28', '2019-05-30',
- '2019-06-09','2019-06-10', '2019-11-26']
+obsolete_dates = [
+    '2018-09-03', '2018-12-25', '2018-12-26', '2018-12-31',
+    '2019-01-01', '2019-04-19', '2019-04-21', '2019-04-22',
+    '2019-05-05', '2019-05-28', '2019-05-30', '2019-06-09',
+    '2019-06-10', '2019-11-26'
+]
 
 # Dictionary contains dates as keys and sets of trainnumbers as values
 delayed_trains = {}
@@ -68,6 +71,7 @@ ys = st.norm.pdf(xs, loc=delayed_mean, scale=delayed_std)
 
 plt.hist(delayed, 20, density=True, label="Amount of delayed stops at 5pm per weekday")
 plt.plot(xs, ys, label="normal distribution with calculated delayed mean and stddev from sample")
+plt.title("Normalized frequencies of delayed stops at 5:00 PM per weekday")
 
 plt.legend()
 plt.show()

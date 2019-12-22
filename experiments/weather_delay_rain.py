@@ -8,7 +8,6 @@ columns = [
     "traintype", "destination", "time", "delay", "cancelled"
 ]
 
-
 #ive added some extra outliers, but i don't know why they exist yet.
 # So maybe they should be included.
 obsolete_dates = ['2018-09-03', '2018-12-25', '2018-12-26','2018-12-31', '2019-01-01',
@@ -55,11 +54,9 @@ with open("../data/neerslag.txt") as neerslag:
         rain = int(line[2])
         if (weekday >=5): continue
         rainlist.append(int(rain))
+
 print("lengths " + str(len(total_trains)))
 print("lengthss " + str(len(rainlist)))
-
-
-
 
 fig, ax1 = plt.subplots()
 ax1.plot(rainlist, 'b-')

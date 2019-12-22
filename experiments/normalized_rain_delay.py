@@ -29,7 +29,7 @@ total_trains = {}
 total_delayed_trains = {}
 
 with open("../data/vertrektijden.csv") as vertrektijden:
-    reader = csv.reader(vertrektijden, delimiter=";")
+    reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
 
@@ -53,14 +53,20 @@ with open("../data/vertrektijden.csv") as vertrektijden:
                 total_delayed_trains[date] = 1
 
 rainlist = []
+
 with open("../data/neerslag.txt") as neerslag:
     reader = csv.reader(neerslag, delimiter=",")
+
     for line in reader:
         date = str(line[1])
+
         if ((str(date) in obsolete_dates_w)): continue
+
         weekday = datetime.date(int(line[1][:4]), int(line[1][4:6]), int(line[1][6:8])).weekday()
         rain = int(line[2])
-        if (weekday >=5): continue
+
+        if (weekday >= 5): continue
+
         rainlist.append(int(rain))
 
 percentage_delayed_per_day = []
@@ -85,5 +91,3 @@ plt.legend()
 plt.xlabel("Days in data")
 plt.ylabel("Rain [mm] (left) -- Normalized no. of delayed trains (right)")
 plt.show()
-
-

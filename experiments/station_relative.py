@@ -35,6 +35,7 @@ with open("../data/vertrektijden.csv") as vertrektijden:
                 delayed_trains[station] = delayed_trains[station] + 1
 
 relative_delays = []
+
 for key in total_trains.keys():
     relative_delays.append(delayed_trains.get(key, 0) / total_trains[key])
 
