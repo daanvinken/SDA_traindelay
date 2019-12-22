@@ -1,5 +1,6 @@
-# histogram showing amount of delayed stops per weekday at 8am
+# histogram showing amount of delayed stops per weekday
 import scipy.stats as st
+import numpy as np
 import matplotlib.pyplot as plt
 import csv
 import datetime
@@ -22,19 +23,13 @@ with open("../data/vertrektijden.csv") as vertrektijden:
     for line in reader:
 
         date = line[columns.index("date")]
-
-        if (date in obsolete_dates): continue
-
         year, month, day = date.split("-")
         weekday = datetime.date(int(year), int(month), int(day)).weekday()
 
+        if (date in obsolete_dates) : continue
+
         # filtering out weekends
         if (weekday >= 5): continue
-
-        time = line[columns.index("time")]
-        hour, _, _ = time.split(":")
-
-        if (hour != "08"): continue
 
         delay = line[columns.index("delay")]
 
@@ -44,7 +39,10 @@ with open("../data/vertrektijden.csv") as vertrektijden:
             else:
                 delayed_trains[date] = delayed_trains[date] + 1
 
-delayed = list(delayed_trains.values())
+delayed_log = list(delayed_trains.values())
+# calculate (ln(delayed))
+print("since we expect the distribution of X to be lognormal, that means ln(X) must be normal, and we will calculate the p-value for that instead")
+delayed = [np.log(x) for x in delayed_log]
 
 delayed_mean = sum(delayed)/len(delayed)
 
@@ -63,11 +61,10 @@ print("calculated delayed standard deviation is %s" % (delayed_std))
 _, p = st.kstest(delayed, 'norm', (delayed_mean, delayed_std))
 print("calculated p-value from normal distribution with calculated delayed mean and standard deviation is %s (no rejection)" % (p))
 
-xs = range(0, 2500)
+xs = np.arange(9.2, 10.4, 0.01)
 ys = st.norm.pdf(xs, loc=delayed_mean, scale=delayed_std)
 
-plt.hist(delayed, 20, density=True, label="Amount of delayed stops at 8am per weekday")
+plt.hist(delayed, 20, density=True, label="Log of amount of delayed stops per weekday")
 plt.plot(xs, ys, label="normal distribution with calculated delayed mean and stddev from sample")
-
 plt.legend()
 plt.show()

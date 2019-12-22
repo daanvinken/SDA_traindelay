@@ -1,6 +1,8 @@
 import networkx as nx
 from trajecten import get_paths
 from trajecten import station_data
+from most_delayed import get_most_delayed
+
 
 
 import matplotlib.pyplot as plt
@@ -28,17 +30,36 @@ def get_coords2(node, coords, edges):
     return [x, y]
 
 def create_graph():
-    # Execute get_paths once for the ns_paths file. If ns_data exists, you
-    # can turn off the line below.
-    paths = [p[0] for p in get_paths("data/ns.csv")]
-    all_paths = []
+    # Execute get_paths once for the ns_paths file.
     f = open("data/ns_paths.txt")
+
+    all_paths = []
     for line in f:
         split = line.split(',')
         all_paths.append([split[0].split(' '), split[1].replace('\n', '').split(' ')[1:]])
     paths = [p[0] for p in all_paths]
 
     stations = station_data()
+
+
+    delays = get_most_delayed(False)
+    most_delayed = delays[0:5]
+    least_delayed = delays[len(delays) - 5: len(delays)]
+
+    coords_node = [[s[1], s[2], s[3]] for s in stations]
+    least_delayed_nodes = []
+    for l in least_delayed:
+        least_delayed_nodes.append(get_coords(l[3], coords_node))
+    x_least = [l[0] for l in least_delayed_nodes]
+    y_least = [l[1] for l in least_delayed_nodes]
+
+    most_delayed_nodes = []
+    for l in most_delayed:
+        most_delayed_nodes.append(get_coords(l[3], coords_node))
+    x_most = [l[0] for l in most_delayed_nodes]
+    y_most = [l[1] for l in most_delayed_nodes]
+
+
 
     # Get all edges and nodes of the graph
     nodes = []
@@ -99,6 +120,8 @@ def create_graph():
     ax.imshow(img, extent=[3.35,7.15,50.7,53.5])
 
     nx.draw(G,pos,node_size=10, with_labels=False, font_size = 7)
+    plt.scatter(x_least, y_least, c='green')
+    plt.scatter(x_most, y_most, c='red')
     plt.show()
 
 create_graph()

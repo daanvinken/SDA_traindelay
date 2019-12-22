@@ -24,7 +24,7 @@ for i in companies:
 for i in companies:
     total_trains[i] = 0;
 
-with open("../data/ALL_trains_2019_08_01_to_2019_11_01.csv") as vertrektijden:
+with open("../data/vertrektijden.csv") as vertrektijden:
     reader = csv.reader(vertrektijden, delimiter=",")
 
     for line in reader:
@@ -40,18 +40,14 @@ with open("../data/ALL_trains_2019_08_01_to_2019_11_01.csv") as vertrektijden:
         if int(delay) > 0:
             delayed_trains[company] = delayed_trains[company] + 1
 
-# plt.scatter(total_trains.values(), delayed_trains.values(), alpha=0.1)
-# plt.ylabel("Amount of delayed stops per day")
-# plt.xlabel("Amount of stops per day")
-# plt.show()
-
 performance = [];
 
 for i in delayed_trains:
     performance.append(delayed_trains[i] / total_trains[i])
 
 y_pos = np.arange(len(companies))
-# performance = delayed_trains.values()
+
+f = plt.figure()
 
 plt.bar(y_pos, performance, align='center')
 plt.xticks(y_pos, companies, rotation='vertical')
@@ -60,5 +56,7 @@ plt.ylabel("$\\dfrac{\\mathrm{delayed}}{\\mathrm{total}} \%$")
 plt.tight_layout()
 
 plt.show()
+
+f.savefig('../results/delayed_per_total.png', bbox_inches='tight')
 
 # print(companies, totals)
