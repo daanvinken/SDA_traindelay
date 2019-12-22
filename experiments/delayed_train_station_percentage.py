@@ -24,7 +24,7 @@ for name in station_data():
 
 stations = {}
 
-filepath = "data/ns.csv"
+filepath = "data/ns_vertrektijden.csv"
 with open(filepath) as FileObj:
     for line in FileObj:
         l = parse_line(line)

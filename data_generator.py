@@ -66,10 +66,11 @@ if not os.path.isfile(dest_folder + '/delay.csv'):
             "python3",
             "split.py",
             "--delay=1",
+            "--transporter=NS",
             "--file=delay.csv"
         ])
     except subprocess.CalledProcessError:
-        print("Failed to generate file with delayed trains, aborting")
+        print("Failed to generate file with delayed NS trains, aborting")
 
         sys.exit()
 else:

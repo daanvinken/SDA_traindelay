@@ -1,8 +1,8 @@
-# plot showing a scatterplot between amount of stops made per day, and amount of delayed stops made per day
 import matplotlib.pyplot as plt
 import csv
 import numpy as np
 
+# Provides for intuitive way of getting the right column from csv
 columns = [
     "date", "station", "trainnumber", "company",
     "traintype", "destination", "time", "delay", "canceled"
@@ -18,9 +18,13 @@ companies = [
     'Eurobahn', 'NMBS', 'Blauwnet', 'Abellio Ra', 'ABRN', 'Breng'
 ]
 
+# Initialize number of delayed stops that were made by
+# a vehicle from a company
 for i in companies:
     delayed_trains[i] = 0;
 
+# Initialize number of stops that were made by a vehicle
+# from a company
 for i in companies:
     total_trains[i] = 0;
 
@@ -30,33 +34,35 @@ with open("../data/vertrektijden.csv") as vertrektijden:
     for line in reader:
         company = line[columns.index("company")];
 
+        # Some companies occur so little that we do not want
+        # list them in our graph.
         if company not in companies:
             continue
 
         delay = line[columns.index("delay")]
 
-        total_trains[company] = total_trains[company] + 1
+        total_trains[company] += 1
 
         if int(delay) > 0:
-            delayed_trains[company] = delayed_trains[company] + 1
+            delayed_trains[company] += 1
 
-performance = [];
+ratio = [];
 
+# Get ratio of delayed stops versus total number of stops
 for i in delayed_trains:
-    performance.append(delayed_trains[i] / total_trains[i])
+    ratio.append(delayed_trains[i] / total_trains[i])
 
 y_pos = np.arange(len(companies))
 
 f = plt.figure()
 
-plt.bar(y_pos, performance, align='center')
+plt.bar(y_pos, ratio, align='center')
 plt.xticks(y_pos, companies, rotation='vertical')
 plt.xlabel("Companies")
-plt.ylabel("$\\dfrac{\\mathrm{delayed}}{\\mathrm{total}} \%$")
+plt.ylabel("Percentage delayed stops of total stops")
+
 plt.tight_layout()
 
 plt.show()
 
 f.savefig('../results/delayed_per_total.png', bbox_inches='tight')
-
-# print(companies, totals)
