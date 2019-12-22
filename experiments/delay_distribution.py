@@ -38,7 +38,7 @@ week_days= ['Monday', 'Tuesday','Wednesday', 'Thursday', 'Friday', 'Saturday','S
 for day in week_days:
     days_delay_list = []
     with open('../data/delay.csv') as source_file:
-        reader = csv.reader(source_file, delimiter=";")
+        reader = csv.reader(source_file, delimiter=",")
         current_date = reader.__next__()[0]
         delay_counter=0
         for row in reader:

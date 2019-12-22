@@ -48,7 +48,7 @@ Experiments can be run by navigating to the `experiments` folder and running Pyt
 - `weather_delayornot_wind.py`: Plot to find the relation between the rain in the Netherlands and the number of delayed trains, both on a single day.
 - `weather_delayornot_wind_percentage.py`: Plot to find the relation between the rain in the Netherlands and the number of delayed trains (percentage), both on a single day.
 - `weekday.py`: plot showing amount of stops and delays per weekday (total)
-- `weekdays.py`: Experiment description
+- `weekdays.py`: Plotting delay in minutes on weekdays (excluding cancelled trains)
 
 ## Contributors
 Daan Vinken, Joël Buter, Ricardo van Aken, Jesse Postema
